@@ -1,8 +1,9 @@
 FROM python:3.8-slim-buster
 
+COPY app/requirements.txt /tmp/requirements.txt 
+RUN pip install -r /tmp/requirements.txt
+
 COPY app /app
 WORKDIR /app
-
-RUN pip install -r requirements.txt
 
 CMD ["python", "main.py"]
