@@ -60,6 +60,10 @@ def search():
     max_page = total_count // limit + 1
     return render_template('index.html', results=results, query=query, category=category, page=page, max_page=max_page)
 
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
 
 @app.route('/download', methods=['POST'])
 def download():
