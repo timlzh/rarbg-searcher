@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>Sending...</title>
+    <script src="{{ url_for('static', filename='js/jquery-1.7.2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.jsonrpc.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/aria2.js') }}"></script>
+</head>
+
+<script>
+    $(document).ready(function () {
+        {% if downloader == 'aria2' %}
+
+        var endPoint = window.localStorage.getItem("endPoint");
+        var token = window.localStorage.getItem("token");
+        var uri = {{ hashes | tojson
+    }};
+
+    if (!endPoint || !token) {
+        alert("请先在设置页面配置Aria2");
+        window.location.href = "/settings";
+    }
+
+    aria2 = new Aria2(endPoint, token);
+    aria2.addUris(uri);
+    {% else %}
+    alert("暂不支持该下载器");
+    window.history.back();
+    {% endif %}
+        });
+</script>
+
+</html>

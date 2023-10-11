@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Rarbg搜索器{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Rarbg搜索器">
+    <meta name="author" content="Timlzh">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png" />
+
+    <style>
+        @font-face {
+            font-family: zpix;
+            src: url("{{ url_for('static', filename='fonts/zpix.woff2') }}");
+        }
+    </style>
+
+    <link href="{{ url_for('static', filename='css/nes.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet" />
+    {% block head %}
+    {% endblock %}
+</head>
+
+<body>
+    <div class="nav">
+        <span class="nav-title">
+            <h1><i class="nes-icon is-medium heart" style="transform: scale(3) translate(0%, 30%);"></i>Rarbg搜索器</h1>
+        </span>
+
+        <div class="nav-btns">
+            {% block nav_btns %}
+            {% endblock %}
+        </div>
+    </div>
+
+    {% block body %}
+    {% endblock %}
+</body>
+
+<footer>
+    <a href="https://github.com/timlzh/rarbg-searcher" class="github-link active" target="_blank">
+        <p class="nes-balloon from-right" id="fork-balloon">Fork me<br>on GitHub</p>
+        <i class="nes-octocat animate"></i>
+    </a>
+    {% block footer %}
+    {% endblock %}
+</footer>
+
+
+{% block end %}
+{% endblock %}
+
+
+</html>

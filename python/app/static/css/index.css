@@ -1,0 +1,39 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.query-container{
+    width: 90%;
+}
+
+.results-container{
+    width: 90%;
+    margin-top: 1rem;
+}
+
+.results-table{
+    overflow-x: hidden;
+    table-layout: fixed;
+    word-break: break-all;
+    width: 100%;
+}
+
+.results-page-nav, 
+.download-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.results-page-nav{
+    margin-top: 1rem;
+}
+
+
+.download-container{
+    margin-bottom: 1rem;
+}

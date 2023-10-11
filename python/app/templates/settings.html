@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    {{ super() }} - 设置
+{% endblock %}
+
+
+{% block head %}
+<link href="{{ url_for('static', filename='css/settings.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block nav_btns %}
+<a href="/" class="nes-btn is-primary">首页</a>
+{% endblock %}
+
+
+{% block body %}
+<div class="nes-container with-title settings-container">
+    <p class="title">设置</p>
+    <div class="nes-container with-title settings-item">
+        <p class="title">Aria2 RPC</p>
+        <form onsubmit="window.localStorage.setItem('endPoint', document.getElementById('endPoint').value);window.localStorage.setItem('token', document.getElementById('token').value);alert('保存成功');">
+            <div class="nes-field">
+                <label for="endPoint">RPC地址</label>
+                <input type="text" id="endPoint" name="endPoint" class="nes-input" placeholder="http://localhost:6800/jsonrpc" value="">
+            </div>
+            <br>
+            <div class="nes-field">
+                <label for="token">密钥</label>
+                <input type="text" id="token" name="token" class="nes-input" placeholder="token" value="">
+            </div>
+            <br>
+            <button type="submit" class="nes-btn is-primary">保存</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block end %}
+<script>
+    var endPoint = window.localStorage.getItem("endPoint");
+    var token = window.localStorage.getItem("token");
+    console.log(endPoint);
+    console.log(token);
+    if (endPoint) {
+        document.getElementById("endPoint").value = endPoint;
+    }
+    if (token) {
+        document.getElementById("token").value = token;
+    }
+</script>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

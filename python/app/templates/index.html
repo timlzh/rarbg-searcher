@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ super() }} - 首页
+{% endblock %}
+
+
+{% block head %}
+<link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block nav_btns %}
+<a href="/settings.html" class="nes-btn is-primary">设置</a>
+{% endblock %}
+
+
+{% block body %}
+<div class="nes-container query-container">
+    <form action="/search" method="post" name="query_form">
+        <input type="text" id="query" name="query" class="nes-input" placeholder="搜索关键词" {% if query
+            %}value="{{ query }}" {% endif %} required>
+        <br>
+        <br>
+        <div style="display: flex;width: 100%;justify-content: space-between;">
+            <div class="nes-select is-warning" style="width: auto;">
+                <select id="category" name="category" required>
+                    <option value="all" {% if category=='all' %}selected{% endif %}>全部</option>
+                    <option value="movies" {% if category=='movies' %}selected{% endif %}>电影</option>
+                    <option value="tv" {% if category=='tv' %}selected{% endif %}>电视剧</option>
+                    <option value="music" {% if category=='music' %}selected{% endif %}>音乐</option>
+                    <option value="games" {% if category=='games' %}selected{% endif %}>游戏</option>
+                    <option value="software" {% if category=='software' %}selected{% endif %}>软件</option>
+                    <option value="ebooks" {% if category=='ebooks' %}selected{% endif %}>电子书</option>
+                    <option value="xxx" {% if category=='xxx' %}selected{% endif %}>成人</option>
+                </select>
+            </div>
+            <input type="hidden" id="page" name="page" value="1">
+            <button type="submit" class="nes-btn is-primary" style="height: 50%;">搜索</button>
+        </div>
+    </form>
+</div>
+
+{% if results %}
+<div class="nes-container results-container">
+    <form action="/download" method="post">
+        <div class="download-container">
+            <span>下载选中文件:</span>
+            <div class="download-btns">
+                <button type="button" class="nes-btn is-primary"
+                    onclick="var cbs = document.querySelectorAll('input[type=checkbox]:checked');var hashes = [];for(var i = 0; i < cbs.length; i++) {hashes.push(cbs[i].value);}var text = hashes.join('\n');navigator.clipboard.writeText(text);alert('已复制到剪贴板');">批量复制</button>
+
+                <button type="submit" class="nes-btn is-primary" name="downloader" value="aria2">Aria2 RPC</button>
+            </div>
+        </div>
+        <div class="nes-table-responsive results-table">
+            <table class="nes-table is-bordered is-centered">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox"
+                                onclick="var cbs = document.querySelectorAll('input[type=checkbox]');for(var i = 0; i < cbs.length; i++) {cbs[i].checked = this.checked;}"
+                                id="check-all"></th>
+                        <th>名称</th>
+                        <th>大小</th>
+                        <th>种子</th>
+                        <th>类别</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td><input type="checkbox" name="hashes" value="{{ result.hash }}"
+                                onclick="document.getElementById('check-all').checked = false;"></td>
+                        <td>{{ result.title }}</td>
+                        <td>{{ result.size }}</td>
+                        <td><a href="{{ result.hash }}">{{ result.hash }}</a></td>
+                        <td>{{ result.cat }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+    {% if max_page and max_page > 1 %}
+    <div class="results-page-nav">
+        <button class="nes-btn is-primary"
+            onclick="document.getElementById('page').value = {{ page - 1 }};document.getElementById('query').value = '{{ query }}';document.getElementById('category').value = '{{ category }}';document.forms.query_form.submit();"
+            {% if page==1 %}disabled{% endif %}>上一页</button>
+
+        <p>第{{ page }}页，共{{ max_page }}页</p>
+
+        <button class="nes-btn is-primary"
+            onclick="document.getElementById('page').value = {{ page + 1 }};document.getElementById('query').value = '{{ query }}';document.getElementById('category').value = '{{ category }}';document.forms.query_form.submit();"
+            {% if page==max_page %}disabled{% endif %}>下一页</button>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

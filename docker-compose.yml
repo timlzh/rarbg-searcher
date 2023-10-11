@@ -1,0 +1,14 @@
+version: '3.0'
+services:
+  db:
+    build: ./mongo
+    restart: always
+    volumes:
+      - ./data:/data/db
+  python:
+    build: ./python
+    restart: always
+    ports:
+      - 60100:5000
+    links:
+      - db
