@@ -4,7 +4,7 @@
 
 ## 介绍
 
-![notice](./static/notice.jpg)
+![notice](./images/notice.jpg)
 <div align="center">
     <h3>R.I.P. Rarbg</h3>
 </div>
@@ -13,9 +13,9 @@ Rarbg 数据库的搜索器，可以在本地快速搜索 Rarbg 的种子，并�
 
 ## 截图
 
-![screenshot1](./static/screenshot1.jpeg)
-![screenshot2](./static/screenshot2.jpeg)
-![screenshot3](./static/screenshot3.jpeg)
+![screenshot1](./images/screenshot1.jpeg)
+![screenshot2](./images/screenshot2.jpeg)
+![screenshot3](./images/screenshot3.jpeg)
 
 ## 使用方法
 
